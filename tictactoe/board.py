@@ -14,7 +14,7 @@ class Board:
     def is_inbounds(self, row: int, col: int) -> bool:
         return row >= 0 and row < self._size and col >= 0 and col < self._size
 
-    def _is_open(self, row: int, col: int) -> bool:
+    def is_open(self, row: int, col: int) -> bool:
         if self.is_inbounds(row, col):
             return self._grid[row][col] == " "
         print("Error: out of bounds.")
@@ -22,7 +22,7 @@ class Board:
 
     # Returns True if grid is updated successfully.
     def update(self, row: int, col: int, val: str) -> bool:
-        if self._is_open(row, col):
+        if self.is_open(row, col):
             self._grid[row][col] = val
             return True
         else:
