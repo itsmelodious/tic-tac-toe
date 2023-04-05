@@ -6,8 +6,8 @@ from npc_player import NpcPlayer
 
 class TicTacToe:
 
-    def __init__(self):
-        self.board = Board(3)
+    def __init__(self, size: int = 3):
+        self.board = Board(size)
         self.p1 = Player(1, "X")
         self.p2 = NpcPlayer(2, "O")
         self._squares_filled: int = 0
