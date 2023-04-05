@@ -23,7 +23,7 @@ class Board:
     def update(self, row: int, col: int, val: str) -> bool:
         if self._is_open(row, col):
             self._grid[row][col] = val
-            print(str(self._grid))
+            self.print_grid()
             return True
         else:
             print("Invalid square")
