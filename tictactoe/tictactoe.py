@@ -1,5 +1,6 @@
 from board import Board
 from player import Player
+from npc_player import NpcPlayer
 
 
 class TicTacToe:
@@ -7,7 +8,7 @@ class TicTacToe:
     def __init__(self):
         self.board = Board(3)
         self.p1 = Player(1, "X")
-        self.p2 = Player(2, "O")
+        self.p2 = NpcPlayer(2, "O")
         self._squares_filled: int = 0
         self._is_p1_turn: bool = True
 
@@ -51,18 +52,14 @@ class TicTacToe:
             else:
                 player = game.p2
             print(f"Player {player.number}'s turn.")
-            row_input = input(
-                "Select a row from 0 to 2, inclusive. The top-most row starts at 0. \n")
-            col_input = input(
-                "Select a column from 0 to 2, inclusive. The left-most column starts at 0. \n")
-            try:
-                row_num = int(row_input)
-                col_num = int(col_input)
-                game.play(player, row_num, col_num)
-                if game.is_winning_move(player, row_num, col_num):
+            game.board.print_grid()
+            selected_square = player.select_square(game.board)
+            if selected_square is not None:
+                row = selected_square[0]
+                col = selected_square[1]
+                game.play(player, row, col)
+                if game.is_winning_move(player, row, col):
                     break
-            except ValueError:
-                print("Invalid input. Please enter in a valid square number.")
 
 
 if __name__ == "__main__":
