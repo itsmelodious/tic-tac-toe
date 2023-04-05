@@ -17,16 +17,16 @@ class Board:
     def _is_open(self, row: int, col: int) -> bool:
         if self.is_inbounds(row, col):
             return self._grid[row][col] == " "
+        print("Error: out of bounds.")
         return False
 
     # Returns True if grid is updated successfully.
     def update(self, row: int, col: int, val: str) -> bool:
         if self._is_open(row, col):
             self._grid[row][col] = val
-            self.print_grid()
             return True
         else:
-            print("Invalid square")
+            print("Invalid square: please select an open square.")
             return False
 
     def get_size(self) -> int:
@@ -37,10 +37,12 @@ class Board:
 
     def print_grid(self):
         lines = []
-        for row in self._grid:
+        for row_i, row in enumerate(self._grid):
             lines.append('|'.join(f' {str(x)} ' for x in row))
-            lines.append('---+' * len(row))
+            if row_i // 2 != 1:
+                lines.append('---+' * len(row))
         print('\n'.join(lines))
+        print('\n')
 
         # # print column characters on top
         # columns = [chr(ord("a") + i) for i in range(self._size)]
@@ -66,13 +68,13 @@ class Board:
 
     def main():
         b = Board(3)
-        # b.update(1, 1, "X")
-        # b.update(0, 1, "O")
-        # b.update(0, 0, "X")
-        # b.update(2, 2, "O")
-        # b.update(2, 1, "O")
-        # b.update(2, 1, "X")
-        # b.print_grid()
+        b.update(1, 1, "X")
+        b.update(0, 1, "O")
+        b.update(0, 0, "X")
+        b.update(2, 2, "O")
+        b.update(2, 1, "O")
+        b.update(2, 1, "X")
+        b.print_grid()
 
 
 if __name__ == "__main__":

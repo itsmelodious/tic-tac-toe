@@ -21,10 +21,11 @@ class TicTacToe:
     def play(self, player: Player, row: int, col: int) -> None:
         is_updated: bool = self.board.update(row, col, player.symbol)
         if not is_updated:
-            print("Please provide a valid (row, column) entry, e.g. (1,1).")
+            print("Please provide a valid (row, column) entry.")
         else:
             self._squares_filled += 1
             self._is_p1_turn = not self._is_p1_turn
+            self.board.print_grid()
 
     def is_winning_move(self, player: Player, row: int, col: int) -> bool:
         grid = self.board.get_grid()
