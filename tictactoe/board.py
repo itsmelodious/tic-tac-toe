@@ -2,12 +2,20 @@ from typing import List
 
 
 class Board:
+
+    directions = [(-1, -1), (-1, 0), (-1, 1),
+                  (0, -1), (0, 1),
+                  (1, -1), (1, 0), (1, 1)]
+
     def __init__(self, s: int):
         self._size = s
         self._grid: List[List[str]] = [[" "] * s for _ in range(s)]
 
+    def is_inbounds(self, row: int, col: int) -> bool:
+        return row >= 0 and row < self._size and col >= 0 and col < self._size
+
     def _is_open(self, row: int, col: int) -> bool:
-        if row >= 0 and row < self._size and col >= 0 and col < self._size:
+        if self.is_inbounds(row, col):
             return self._grid[row][col] == " "
         return False
 
@@ -60,6 +68,7 @@ class Board:
         # b.update(0, 0, "X")
         # b.update(2, 2, "O")
         # b.update(2, 1, "O")
+        # b.update(2, 1, "X")
         # b.print_grid()
 
 
