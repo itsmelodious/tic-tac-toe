@@ -17,7 +17,7 @@ class Board:
     def is_open(self, row: int, col: int) -> bool:
         if self.is_inbounds(row, col):
             return self._grid[row][col] == " "
-        print("Error: out of bounds.")
+        print(f"({row}, {col}) - Error: out of bounds.")
         return False
 
     # Returns True if grid is updated successfully.
@@ -26,7 +26,7 @@ class Board:
             self._grid[row][col] = val
             return True
         else:
-            print("Invalid square: please select an open square.")
+            print(f"({row}, {col}) - Invalid square: please select an open square.")
             return False
 
     def get_size(self) -> int:
@@ -44,28 +44,6 @@ class Board:
         print('\n'.join(lines))
         print('\n')
 
-        # # print column characters on top
-        # columns = [chr(ord("a") + i) for i in range(self._size)]
-        # print('   ', '   '.join([str(val) for val in columns]))
-
-        # row_separator = f'  +{"---+" * len(columns)}'
-
-        # for i_row, rows in enumerate(self._grid):
-        #     print(row_separator)
-        #     # print row number
-        #     print(i_row, end="")
-
-        #     for r in rows:
-        #         print(f' | {r} |')
-        #     # # depending on location of X, either print a row including X or an empty row
-        #     # if i_row == x_loc[0]:
-        #     #     print(
-        #     #         f' |{"   |" * (x_loc[1])} {x_symbol} |{"   |" * (len(columns)-x_loc[1]-1)}')
-        #     # else:
-        #     #     print(f' |{"   |" * len(columns)}')
-        #     # print closing row separator
-        #     print(row_separator)
-
     def main():
         b = Board(3)
         b.update(1, 1, "X")
@@ -73,6 +51,7 @@ class Board:
         b.update(0, 0, "X")
         b.update(2, 2, "O")
         b.update(2, 1, "O")
+        b.print_grid()
         b.update(2, 1, "X")
         b.print_grid()
 
