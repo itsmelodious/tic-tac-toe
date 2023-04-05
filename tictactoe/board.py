@@ -11,12 +11,15 @@ class Board:
             return self._grid[row][col] == " "
         return False
 
-    def update(self, row: int, col: int, val: str) -> str:
+    # Returns True if grid is updated successfully.
+    def update(self, row: int, col: int, val: str) -> bool:
         if self._is_open(row, col):
             self._grid[row][col] = val
-            return str(self._grid)
+            print(str(self._grid))
+            return True
         else:
-            return "Please provide a valid (row, column) entry, e.g. (1,a)."
+            print("Invalid square")
+            return False
 
     def get_size(self) -> int:
         return self._size
