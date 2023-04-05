@@ -1,3 +1,4 @@
+from typing import List, Tuple
 from board import Board
 from player import Player
 from npc_player import NpcPlayer
@@ -35,11 +36,20 @@ class TicTacToe:
             new_row = row + row_dir
             new_col = col + col_dir
             matches = 1
-            while self.board.is_inbounds(new_row, new_col) and grid[new_row][new_col] == player.symbol and matches < 3:
-                new_row += row_dir
-                new_col += col_dir
-                matches += 1
+            # continue checking the same direction and the opposite direction
+            continue_checking: List[Tuple[int, int]] = [(new_row, new_col)]
+            while continue_checking:
+                n_row, n_col = continue_checking.pop()
+                if self.board.is_inbounds(n_row, n_col) and \
+                        grid[n_row][n_col] == player.symbol and \
+                        matches < 3:
+                    matches += 1
+                    continue_checking.append(
+                        (n_row + row_dir, n_col + col_dir))
+                    continue_checking.append(
+                        (row - row_dir, col - col_dir))
             if matches == 3:
+                print("Game over!\n")
                 print(f"Player {player.number} won!")
                 return True
         return False
