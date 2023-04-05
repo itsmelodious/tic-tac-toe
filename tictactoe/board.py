@@ -32,6 +32,9 @@ class Board:
     def get_size(self) -> int:
         return self._size
 
+    def get_grid(self) -> List[List[str]]:
+        return self._grid
+
     def print_grid(self):
         lines = []
         for row in self._grid:
